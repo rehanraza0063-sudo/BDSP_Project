@@ -1,0 +1,19 @@
+from scipy.fft import ifft
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Calculate the removed frequency components (noise) by subtracting the filtered spectrum from the original convolved spectrum
+noise_in_frequency_domain = convolved_yf - filtered_convolved_yf
+
+# Perform Inverse FFT on these removed components to see them in the time domain
+# We take the real part as the original signal was real.
+removed_noise_signal = np.real(ifft(noise_in_frequency_domain, n=N_convolved_yf))
+
+# Plot the removed noise signal
+plt.figure(figsize=(15, 6))
+plt.plot(removed_noise_signal)
+plt.title('Time-Domain Representation of Removed Noise (Frequencies < 20Hz or > Nyquist)')
+plt.xlabel('Sample Index')
+plt.ylabel('Amplitude')
+plt.grid(True)
+plt.show()
