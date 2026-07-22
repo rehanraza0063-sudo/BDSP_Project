@@ -1,0 +1,45 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the signal segment 'signal_a'
+# Assuming record, start_sample, and end_sample are already defined from previous cells
+# If not, you would need to define them here, e.g.:
+# import wfdb
+# record_name = '100'
+# record = wfdb.rdrecord(record_name)
+# start_sample = 0
+# end_sample = 200
+signal_a = record.p_signal[start_sample:end_sample, 0]
+
+# Define a simple kernel
+kernel = np.array([0.2, 0.6, 0.2])
+
+# Perform convolution
+convolved_signal = np.convolve(signal_a, kernel, mode='full')
+
+# Plot the original signal, the kernel, and the convolved signal
+plt.figure(figsize=(18, 10))
+
+plt.subplot(3, 1, 1)
+plt.plot(signal_a)
+plt.title(f'Original Signal Segment (Lead {record.sig_name[0]})')
+plt.xlabel('Sample Index')
+plt.ylabel('Amplitude')
+plt.grid(True)
+
+plt.subplot(3, 1, 2)
+plt.plot(kernel)
+plt.title('Convolution Kernel')
+plt.xlabel('Kernel Index')
+plt.ylabel('Value')
+plt.grid(True)
+
+plt.subplot(3, 1, 3)
+plt.plot(convolved_signal)
+plt.title(f'Convolved Signal (Original with Kernel)')
+plt.xlabel('Output Sample Index')
+plt.ylabel('Amplitude')
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
