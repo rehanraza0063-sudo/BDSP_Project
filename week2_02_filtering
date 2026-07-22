@@ -1,0 +1,32 @@
+from scipy.fft import fft, ifft, fftfreq
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Ensure yf (FFT of signal_a), xf (frequency bins) and kernel are available
+# If they are not defined in previous cells, you would need to re-run the FFT cell (c834e7a8)
+# and potentially the convolution kernel definition cell (0ad2c6c4 or similar).
+
+# Convolve the FFT of the signal with the kernel
+# Note: Convolution in the time domain is multiplication in the frequency domain,
+# but if the user literally means 'convolve the FFT signal', we will do that.
+# For frequency domain convolution, the signals should ideally be zero-padded to avoid circular convolution.
+# For this demonstration, we will directly convolve the FFT values.
+convolved_yf = np.convolve(yf, kernel, mode='full')
+
+# Adjust xf to match the length of convolved_yf for plotting
+# The length of the convolved signal will be N + len(kernel) - 1
+# We need to re-calculate xf based on this new length.
+N_convolved_yf = len(convolved_yf)
+# Assuming fs is still the sampling frequency from the original signal
+convolved_xf = fftfreq(N_convolved_yf, 1 / fs)
+
+# Plot the magnitude spectrum of the convolved FFT
+plt.figure(figsize=(15, 6))
+plt.plot(convolved_xf, np.abs(convolved_yf))
+plt.title(f'Magnitude Spectrum of Convolved FFT (Original FFT convolved with Kernel)')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Magnitude')
+plt.grid(True)
+# Limit x-axis to positive frequencies up to Nyquist for better visualization
+plt.xlim(0, fs / 2)
+plt.show()
