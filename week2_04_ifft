@@ -1,0 +1,19 @@
+from scipy.fft import ifft
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Perform Inverse FFT on the filtered_convolved_yf
+# The 'n' parameter for ifft should ideally match the original signal length
+# or the length of the frequency spectrum if zero-padded. Here, N_convolved_yf is the length
+# of the convolved_yf before filtering, which was derived from a 'full' convolution.
+# We take the real part as the original signal was real.
+reconstructed_filtered_convolved_signal = np.real(ifft(filtered_convolved_yf, n=N_convolved_yf))
+
+# Plot the reconstructed signal
+plt.figure(figsize=(15, 6))
+plt.plot(reconstructed_filtered_convolved_signal)
+plt.title('Time-Domain Signal after IFFT of Filtered Convolved FFT')
+plt.xlabel('Sample Index')
+plt.ylabel('Amplitude')
+plt.grid(True)
+plt.show()
