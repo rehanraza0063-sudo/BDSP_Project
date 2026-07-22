@@ -1,0 +1,24 @@
+import numpy as np
+
+# Get the segment of the signal we were working with
+signal_segment_for_delay = record.p_signal[start_sample:end_sample, 0]
+
+# Define the delay amount in samples
+delay_samples = 20 # You can change this value
+
+# Create a delayed signal by shifting the original.
+# For simplicity, we'll pad with zeros at the beginning.
+delayed_signal_segment = np.zeros_like(signal_segment_for_delay)
+if delay_samples < len(signal_segment_for_delay):
+    delayed_signal_segment[delay_samples:] = signal_segment_for_delay[:-delay_samples]
+
+# Plot the original and delayed signals
+plt.figure(figsize=(15, 6))
+plt.plot(signal_segment_for_delay, label='Original Signal Segment')
+plt.plot(delayed_signal_segment, label=f'Delayed Signal (by {delay_samples} samples)', linestyle='--')
+plt.title(f'Original vs. Delayed Signal Segment from {record_name} (Lead {record.sig_name[0]})')
+plt.xlabel('Sample Index')
+plt.ylabel(f'Amplitude ({record.units[0]})')
+plt.grid(True)
+plt.legend()
+plt.show()
