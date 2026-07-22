@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Ensure convolved_yf, convolved_xf, and fs are available from previous cells.
+# Create a copy to avoid modifying the original convolved_yf
+filtered_convolved_yf = np.copy(convolved_yf)
+
+# Get the Nyquist frequency
+nyquist_frequency = fs / 2
+
+# --- Apply filtering based on user request ---
+# Remove all noise before 20 Hz (set magnitude to zero for frequencies < 20 Hz)
+# Add filter between 20 to 500 (given Nyquist is 180 Hz, this means keeping up to Nyquist).
+
+# Find indices for frequencies below 20 Hz
+low_freq_indices = np.where(np.abs(convolved_xf) < 20)
+filtered_convolved_yf[low_freq_indices] = 0
+
+# Find indices for frequencies above Nyquist frequency (180 Hz)
+# We're interested in the positive frequency spectrum for visualization
+high_freq_indices_positive = np.where(convolved_xf > nyquist_frequency)
+filtered_convolved_yf[high_freq_indices_positive] = 0
+
+# Find indices for negative frequencies (mirrored) that are outside the desired band
+high_freq_indices_negative = np.where(convolved_xf < -nyquist_frequency)
+filtered_convolved_yf[high_freq_indices_negative] = 0
+
+# Plot the magnitude spectrum of the filtered convolved FFT
+plt.figure(figsize=(15, 6))
+plt.plot(convolved_xf, np.abs(filtered_convolved_yf))
+plt.title('Magnitude Spectrum of Filtered Convolved FFT (20 Hz to Nyquist)')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Magnitude')
+plt.grid(True)
+plt.xlim(0, nyquist_frequency) # Only show positive frequencies up to Nyquist frequency
+plt.show()
