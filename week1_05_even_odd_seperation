@@ -1,0 +1,11 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Plot the reconstructed signal (IFFT of the filtered convolved FFT)
+plt.figure(figsize=(15, 6))
+plt.plot(reconstructed_filtered_convolved_signal)
+plt.title('Time-Domain Signal after IFFT of Filtered Convolved FFT (Noise Removed)')
+plt.xlabel('Sample Index')
+plt.ylabel('Amplitude')
+plt.grid(True)
+plt.show()
