@@ -1,0 +1,14 @@
+import wfdb
+
+# The base filename is '100' for 100.hea, 100.dat, 100.atr
+record_name = '100'
+
+# Read the record. This will automatically look for 100.hea and 100.dat
+record = wfdb.rdrecord(record_name)
+
+# Display information about the record
+display(record.__dict__)
+
+# Display the first few samples of the signal
+print("\nFirst 5 samples of the signal:")
+display(record.p_signal[:5])
