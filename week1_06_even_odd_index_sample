@@ -1,0 +1,28 @@
+# Ensure we have the latest signal segment
+signal_segment_for_separation = record.p_signal[start_sample:end_sample, 0]
+
+# Separate into even and odd indexed samples
+even_samples = signal_segment_for_separation[::2]
+odd_samples = signal_segment_for_separation[1::2]
+
+# Create a figure with two subplots
+plt.figure(figsize=(18, 6))
+
+# Subplot for Even Samples
+plt.subplot(1, 2, 1) # 1 row, 2 columns, first plot
+plt.plot(even_samples)
+plt.title(f'Even Indexed Samples (Lead {record.sig_name[0]})')
+plt.xlabel('Even Sample Index')
+plt.ylabel(f'Amplitude ({record.units[0]})')
+plt.grid(True)
+
+# Subplot for Odd Samples
+plt.subplot(1, 2, 2) # 1 row, 2 columns, second plot
+plt.plot(odd_samples)
+plt.title(f'Odd Indexed Samples (Lead {record.sig_name[0]})')
+plt.xlabel('Odd Sample Index')
+plt.ylabel(f'Amplitude ({record.units[0]})')
+plt.grid(True)
+
+plt.tight_layout() # Adjust layout to prevent overlapping titles/labels
+plt.show()
