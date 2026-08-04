@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Sampling frequency from the header
+fs = record.fs
+
+# FFT
+N = len(pcg)
+fft_values = np.fft.fft(pcg)
+freq = np.fft.fftfreq(N, d=1/fs)
+
+# Positive frequencies only
+positive = freq >= 0
+
+plt.figure(figsize=(12,5))
+plt.plot(freq[positive], np.abs(fft_values)[positive])
+plt.title("Frequency Spectrum of PCG Signal")
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Magnitude")
+plt.grid(True)
+plt.show()
