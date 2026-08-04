@@ -1,0 +1,8 @@
+!pip install wfdb
+import wfdb
+
+# Download the MIT-BIH Arrhythmia Database (mitdb) which contains record '100'.
+# This ensures the necessary .dat, .hea, and .atr files are available locally.
+# The files will be downloaded to a default location, typically the current working directory
+# or a subdirectory named after the database.
+wfdb.dl_database('mitdb', dl_dir='.') # Download to the current directory
