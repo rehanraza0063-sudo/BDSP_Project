@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(7,7))
+
+# Plot zeros
+plt.scatter(np.real(zeros), np.imag(zeros),
+            marker='o', s=60, label='Zeros')
+
+# Plot poles at origin
+plt.scatter(0, 0, marker='x', s=150, linewidths=2, label='99 Poles')
+
+# Unit circle
+theta = np.linspace(0, 2*np.pi, 500)
+plt.plot(np.cos(theta), np.sin(theta), '--')
+
+plt.axhline(0, color='black')
+plt.axvline(0, color='black')
+
+plt.xlabel("Real")
+plt.ylabel("Imaginary")
+plt.title("Pole-Zero Plot of PCG Signal")
+plt.grid(True)
+plt.axis('equal')
+plt.legend()
+plt.show()
