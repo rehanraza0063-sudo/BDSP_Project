@@ -1,0 +1,6 @@
+z = symbols('z')
+
+Xz = sum(float(x[n]) * z**(-n) for n in range(len(x)))
+
+print("Z-Transform:\n")
+pprint(Xz)
