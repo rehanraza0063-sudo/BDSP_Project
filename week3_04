@@ -1,0 +1,9 @@
+x = pcg[:100]
+
+plt.figure(figsize=(10,4))
+plt.stem(range(100), x)
+plt.title("First 100 Samples of PCG")
+plt.xlabel("n")
+plt.ylabel("Amplitude")
+plt.grid(True)
+plt.show()
