@@ -1,0 +1,15 @@
+x = pcg[:100]
+
+N = len(x)
+fft_values = np.fft.fft(x)
+freq = np.fft.fftfreq(N, d=1/fs)
+
+positive = freq >= 0
+
+plt.figure(figsize=(10,5))
+plt.stem(freq[positive], np.abs(fft_values)[positive])
+plt.title("Frequency Spectrum of First 100 PCG Samples")
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Magnitude")
+plt.grid(True)
+plt.show()
