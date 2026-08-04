@@ -1,0 +1,9 @@
+record = wfdb.rdrecord('100')
+
+print("Sampling Frequency:", record.fs)
+print("Signal Shape:", record.p_signal.shape)
+
+# Read first channel
+pcg = record.p_signal[:, 0]
+
+print("Total Samples:", len(pcg))
