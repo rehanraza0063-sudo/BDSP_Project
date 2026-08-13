@@ -1,0 +1,4 @@
+print(f"Total magnitude values for 1000 samples: {len(magnitude)}")
+print("First 20 magnitude values:")
+for i in range(min(20, len(magnitude))):
+    print(f"Magnitude[{i}] = {magnitude[i]:.4f}")
