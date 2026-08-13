@@ -1,0 +1,60 @@
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Number of samples
+N = 1000
+
+# ECG signal
+x = ecg[:N]
+
+# ============================================================
+# 1. FFT TIME
+# ============================================================
+
+start_fft = time.perf_counter()
+
+X_fft = np.fft.fft(x)
+
+end_fft = time.perf_counter()
+
+fft_time = end_fft - start_fft
+
+print("FFT Computation Time =", fft_time, "seconds")
+
+
+# ============================================================
+# 2. DFT USING TWIDDLE FACTOR
+# ============================================================
+
+start_dft = time.perf_counter()
+
+X_dft = np.zeros(N, dtype=complex)
+
+W = np.exp(-2j * np.pi / N)
+
+for k in range(N):
+    for n in range(N):
+        X_dft[k] += x[n] * (W ** (k * n))
+
+end_dft = time.perf_counter()
+
+dft_time = end_dft - start_dft
+
+print("DFT Computation Time =", dft_time, "seconds")
+
+
+# ============================================================
+# 3. Comparison
+# ============================================================
+
+print("\n================================")
+print("COMPUTATION TIME COMPARISON")
+print("================================")
+
+print("FFT :", fft_time, "seconds")
+print("DFT :", dft_time, "seconds")
+
+print("\nDFT is approximately",
+      dft_time / fft_time,
+      "times slower than FFT.")
