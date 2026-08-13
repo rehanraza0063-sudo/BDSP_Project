@@ -1,0 +1,17 @@
+# The 'magnitude' variable already holds the magnitude spectrum
+# derived from the FFT of the first 1000 PCG samples.
+# The 'freq' variable (or 'frequencies' from cell xSGnX8EgsXSK) holds the corresponding frequencies.
+
+# Assuming 'frequencies' and 'magnitude' from cell `fjPsVU6r10Dx` are still available in the kernel state.
+# If not, these variables would need to be re-computed from `pcg[:1000]`.
+
+plt.figure(figsize=(14, 5))
+plt.plot(
+    frequencies[:N//2],
+    magnitude[:N//2]
+)
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Magnitude")
+plt.title("FFT Magnitude Spectrum of First 1000 PCG Samples")
+plt.grid(True)
+plt.show()
