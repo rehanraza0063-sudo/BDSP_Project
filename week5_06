@@ -1,0 +1,19 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Ensure 'x' (first 100 pcg samples) and 'fs' (sampling frequency) are available.
+# 'x' is currently pcg[:100] and 'fs' is 360 from previous cells.
+
+N_100_samples = len(x)
+fft_values_100_samples = np.fft.fft(x)
+freq_100_samples = np.fft.fftfreq(N_100_samples, d=1/fs)
+
+positive_freq_mask = freq_100_samples >= 0
+
+plt.figure(figsize=(10,5))
+plt.stem(freq_100_samples[positive_freq_mask], np.abs(fft_values_100_samples)[positive_freq_mask])
+plt.title("FFT Magnitude Spectrum of First 100 PCG Samples")
+plt.xlabel("Frequency (Hz)")
+plt.ylabel("Magnitude")
+plt.grid(True)
+plt.show()
