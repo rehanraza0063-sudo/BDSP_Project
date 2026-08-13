@@ -1,0 +1,9 @@
+component_index = 4999 # For the 5000th component (0-indexed)
+
+if component_index < len(freq_positive) and component_index < len(magnitude_all):
+    frequency_5000th = freq_positive[component_index]
+    magnitude_5000th = magnitude_all[component_index]
+    print(f"Frequency of the {component_index + 1}th component: {frequency_5000th:.4f} Hz")
+    print(f"Magnitude of the {component_index + 1}th component: {magnitude_5000th:.4f}")
+else:
+    print(f"Error: The {component_index + 1}th component is out of bounds. The signal has fewer frequency components.")
