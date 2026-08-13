@@ -1,0 +1,14 @@
+import matplotlib.pyplot as plt
+
+# Ensure time_dft and time_fft are available from the comparison cell (e.g., '29d8187a')
+
+labels = ['Custom DFT', 'NumPy FFT']
+times = [time_dft, time_fft]
+
+plt.figure(figsize=(8, 5))
+plt.bar(labels, times, color=['skyblue', 'lightcoral'])
+plt.title('Computation Time Comparison: Custom DFT vs. NumPy FFT (100 Samples)')
+plt.xlabel('Method')
+plt.ylabel('Time (seconds)')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
