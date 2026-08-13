@@ -1,0 +1,40 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# The 'pcg' variable should be available from previous cells after executing 'xSGnX8EgsXSK'.
+# The 'fs' (sampling frequency) variable should also be available.
+
+# Compute FFT of the entire PCG signal
+X = np.fft.fft(pcg)
+
+# Number of samples
+N = len(pcg)
+
+# Generate frequency bins
+freq = np.fft.fftfreq(N, d=1/fs)
+
+# Select positive frequencies for plotting
+positive_frequencies_mask = freq >= 0
+freq_positive = freq[positive_frequencies_mask]
+magnitude_positive = np.abs(X)[positive_frequencies_mask]
+phase_positive = np.angle(X)[positive_frequencies_mask]
+
+# Plot Magnitude Spectrum
+plt.figure(figsize=(15, 6))
+plt.plot(freq_positive, magnitude_positive)
+plt.title('Magnitude Spectrum of PCG Signal (FFT)')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Magnitude')
+plt.grid(True)
+plt.xlim(0, fs/2) # Limit x-axis to Nyquist frequency
+plt.show()
+
+# Plot Phase Spectrum
+plt.figure(figsize=(15, 6))
+plt.plot(freq_positive, phase_positive)
+plt.title('Phase Spectrum of PCG Signal (FFT)')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Phase (radians)')
+plt.grid(True)
+plt.xlim(0, fs/2) # Limit x-axis to Nyquist frequency
+plt.show()
