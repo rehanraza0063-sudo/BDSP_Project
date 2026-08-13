@@ -1,0 +1,34 @@
+import time
+import numpy as np
+
+# Ensure 'pcg' is available from earlier record loading
+# Ensure x and N are consistently set for the comparison
+x = pcg[:100] # Use the first 100 samples of pcg
+N = len(x)   # N is now 100
+
+
+print(f"Comparing DFT and FFT for {N} samples.\n")
+
+# --- Custom DFT Implementation ---
+
+start_time_dft = time.time()
+X_dft = np.zeros(N, dtype=complex)
+
+for k_dft in range(N):
+    for n_dft in range(N):
+        X_dft[k_dft] += x[n_dft] * np.exp(-2j * np.pi * n_dft * k_dft / N)
+
+end_time_dft = time.time()
+time_dft = end_time_dft - start_time_dft
+print(f"Time taken for custom DFT: {time_dft:.6f} seconds")
+
+# --- NumPy's FFT Implementation ---
+
+start_time_fft = time.time()
+X_fft = np.fft.fft(x)
+end_time_fft = time.time()
+time_fft = end_time_fft - start_time_fft
+print(f"Time taken for NumPy's FFT: {time_fft:.6f} seconds")
+
+
+print(f"\nNumPy's FFT is {time_dft/time_fft:.2f} times faster than custom DFT for {N} samples.")
