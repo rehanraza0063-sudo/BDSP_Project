@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Compute FFT of the entire PCG signal (variable 'pcg' should be available)
+X_all = np.fft.fft(pcg)
+
+# Extract the magnitude spectrum
+magnitude_all = np.abs(X_all)
+
+# Get the first 5000 magnitude values
+magnitude_5000 = magnitude_all[:1000]
+
+print(f"Displaying the magnitude of the first {len(magnitude_5000)} frequency components:")
+for i, mag in enumerate(magnitude_5000):
+    print(f"Component {i}: {mag:.4f}")
+
+# Ensure 'freq_positive' is available from previous FFT calculations (e.g., from cell '8e5762db')
+# Limit to the first 5000 frequency components
+num_components_to_plot = 5000
+
+# Make sure we don't try to plot more components than available
+plot_freq = freq_positive[:min(len(freq_positive), num_components_to_plot)]
+plot_magnitude = magnitude_all[:min(len(magnitude_all), num_components_to_plot)]
+
+plt.figure(figsize=(15, 6))
+plt.plot(plot_freq, plot_magnitude)
+plt.title(f'Magnitude Spectrum of First {len(plot_magnitude)} Frequency Components')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Magnitude')
+plt.grid(True)
+plt.show()
